@@ -6,9 +6,9 @@ const node_static = require("node-static");
 
 console.log("#Init Web Server#");
 
-let public_files = new(node_static.Server)("/home/enti/ENTI/marques_uf3/pub");
+let public_files = new(node_static.Server)("/home/enti/ENTI/SpacENTI/pub");
 
 http.createServer((request, response)=> {
 	console.log(request.url);
 	public_files.serve(request, response);
-}).listen(8282);
+}).listen(8080);

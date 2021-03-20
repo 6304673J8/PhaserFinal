@@ -1,0 +1,22 @@
+{
+  "name": "spacenti",
+  "version": "1.0.0",
+  "description": "SPACEenti Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/6304673J8/SpacENTI.git"
+  },
+  "author": "Georghe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/6304673J8/SpacENTI/issues"
+  },
+  "homepage": "https://github.com/6304673J8/SpacENTI#readme",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  }
+}
