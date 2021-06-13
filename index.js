@@ -6,7 +6,9 @@ const node_static = require("node-static");
 
 console.log("#Init Web Server#");
 
-let public_files = new(node_static.Server)("/home/enti/ENTI/SpacENTI/pub");
+
+
+let public_files = new(node_static.Server)("pub");
 
 http.createServer((request, response)=> {
 	console.log(request.url);
