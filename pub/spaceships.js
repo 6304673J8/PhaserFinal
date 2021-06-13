@@ -60,7 +60,7 @@ function create () {
 	enemy_speed = 4;
 
 	bgGraphs = this.make.graphics({ x: 0, y: 0, add: false });
-	bgGraphs.generateTexture('bg', 640, 360);
+	bgGraphs.generateTexture('bg', 640, 480);
 	bgTileSprite = this.add.tileSprite(400, 300, 800, 600, 'bg');
 	
 	explosion_sound = this.sound.add("explosion_fx");
@@ -214,10 +214,6 @@ function calculateScore(){
 	else if(score === 42){
 		scoreText.setText('Score: ' + score + ' / OmniMan');
 	}
-}
-
-function enemyReset (enemy){
-	enemy.x = 840;
 }
 
 const config = {
