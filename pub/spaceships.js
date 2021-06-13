@@ -37,7 +37,7 @@ const SCREEN_MARGIN = 32;
 
 function preload () {
 	console.log("Preload Status: OK");
-	this.load.image("bg", "Assets/BG/stars_bg.jpg");
+	this.load.image("bg", "Assets/BG/stars_bg.png");
 	this.load.image("goon_fx", "Assets/FX/FX_GoonPlosion_Cruz.png");
 	this.load.audio("explosion_fx", "Assets/FX/Phaser_Explosion.ogg")
 	this.load.spritesheet("ship", "Assets/Spritesheets/Ships/Goon_Ship_SpriteSheet.png",
@@ -60,7 +60,7 @@ function create () {
 	enemy_speed = 4;
 
 	bgGraphs = this.make.graphics({ x: 0, y: 0, add: false });
-	bgGraphs.generateTexture('bg', 630, 370);
+	bgGraphs.generateTexture('bg', 640, 360);
 	bgTileSprite = this.add.tileSprite(400, 300, 800, 600, 'bg');
 	
 	explosion_sound = this.sound.add("explosion_fx");
@@ -142,15 +142,12 @@ function create () {
 }
 
 function update () {
-	bgTileSprite.TilePositionX += 1;
+	bgTileSprite.TilePositionX += 0.8;
 	
 	for(let i = 0; i < MAX_BULLETS; i++){
 		bullets[i].play('shot', true);	
 	}
 	
-	//for ( let i = 0; i < MAX_ENEMIES; i++){
-	
-	//}
 	if(up_key.isDown){
 		ship.play('fly', true);
 		ship.y-- * ship_speed;
@@ -208,6 +205,15 @@ function enemyReset(enemy){
 function calculateScore(){
 	score++;
 	scoreText.setText('Score: ' + score);
+	if(score === 8){
+		scoreText.setText('Score: ' + score + ' / Amazing');
+	}
+	else if(score === 21){
+		scoreText.setText('Score: ' + score + ' / Jefazo');
+	}
+	else if(score === 42){
+		scoreText.setText('Score: ' + score + ' / OmniMan');
+	}
 }
 
 function enemyReset (enemy){
