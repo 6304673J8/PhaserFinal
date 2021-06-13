@@ -1,7 +1,7 @@
 const scene_w = 640;
 const scene_h = 480;
 
-let player_init_x = 32;
+let player_init_x = 64;
 let game_screen;
 let scoreText;
 let bg;
@@ -11,8 +11,14 @@ let bgGraphs;
 let bgTileSprite;
 
 let ship;
+let ship_speed;
+
 let enemies = [];
+let enemy_speed;
+
 let bullets = [];
+let bullet_speed;
+
 let shooting = true;
 let score = 0;
 
@@ -30,10 +36,10 @@ const SCREEN_MARGIN = 32;
 
 function preload () {
 	console.log("Preload Status: OK");
-	this.load.image("bg", "stars_bg.jpg");
-	this.load.image("ship", "PNG/Characters/woman.png");
-	this.load.image("enemy", "PNG/Characters/man.png");
-	this.load.image("bullets", "PNG/Cars/scooter.png");
+	this.load.image("bg", "Assets/BG/stars_bg.jpg");
+	this.load.image("ship", "Assets/Ships/Goon_Ship.png");
+	this.load.image("enemy", "Assets/Ships/Noog_Ship.png");
+	this.load.image("bullet", "Assets/Projectiles/Goon_Missile.png");
 }
 
 function create () {
@@ -45,14 +51,15 @@ function create () {
 	bgTileSprite = this.add.tileSprite(400, 300, 800, 600, 'bg');
 
 	ship = this.physics.add.image(player_init_x, scene_h/2, "ship");
-	ship.rotation = -95;
-	ship.setScale(4);
-
+	//ship.setScale(1);
+	ship_speed = 20;
+	enemy_speed = 4;
+	bullet_speed = 10;
 	scoreText = this.add.text(player_init_x, 24, 'Score: ' + score, {fontSize: '42px', fill: '#FFF' } );
 
 	for (let i = 0; i < MAX_ENEMIES; i++){
-		let x = Math.random()*scene_w*10 + scene_w/2;
-		let y = Math.random()*scene_h;
+		let x = Math.random() * scene_w * 4 + scene_w/2;
+		let y = Math.random() * scene_h;
 		
 		enemies.push(this.physics.add.image(x, y, "enemy"));
 
@@ -60,7 +67,7 @@ function create () {
 	}
 
 	for (let i = 0; i < MAX_BULLETS; i++){
-		bullets.push(this.physics.add.image(BULLET_INIT_X, BULLET_INIT_Y, "bullets"));
+		bullets.push(this.physics.add.image(BULLET_INIT_X, BULLET_INIT_Y, "bullet"));
 		bullets[i].moving = false;
 
 		this.physics.add.collider(bullets[i]);
@@ -105,10 +112,10 @@ function update () {
 	bgTileSprite.TilePositionX += 1;
 
 	if(up_key.isDown){
-		ship.y--;
+		ship.y-- * ship_speed;
 	}
 	else if(down_key.isDown){
-		ship.y++;
+		ship.y++ * ship_speed;
 	}
 	
 	if(space_key.isUp){
@@ -130,7 +137,7 @@ function update () {
 	
 	for(let i = 0; i < MAX_BULLETS; i++){
 		if (bullets[i].moving){
-			bullets[i].x++;
+			bullets[i].x++ * bullet_speed;
 			if (bullets[i].x >= scene_w + SCREEN_MARGIN){
 				bullets[i].x = BULLET_INIT_X;
 				bullets[i].y = BULLET_INIT_Y;
@@ -141,7 +148,7 @@ function update () {
 	}
 
 	for ( let i = 0; i < MAX_ENEMIES; i++){
-		enemies[i].x--;
+		enemies[i].x-- * enemy_speed;
 	}
 }
 
